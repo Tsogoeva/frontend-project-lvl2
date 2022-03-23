@@ -1,5 +1,5 @@
 import { Command } from 'commander/esm.mjs';
-
+import gendiff from './index.js';
 
 const program = new Command();
 program
@@ -9,7 +9,7 @@ program
   .option('-f, --format <type>', 'output format')
   .action((filepath1, filepath2) => {
     console.log(gendiff(filepath1, filepath2));
-  });;
+  });
 program.parse();
 
 export default program;

@@ -1,26 +1,8 @@
-import _ from 'lodash';
-import path from './fs.js';
+import { readFileSync } from 'fs';
 
-
-const genDiff = (file1, file2) => {
-  const keys1 = Object.keys(file1);
-  const keys2 = Object.keys(file2);
-  const keys = _.union(keys1, keys2);
-
-  const result = {};
-  for (const key of keys) {
-    if (!Object.hasOwn(file1, key)) {
-      result[key] = 'added';
-    } else if (!Object.hasOwn(file2, key)) {
-      result[key] = 'deleted';
-    } else if (file1[key] !== file2[key]) {
-      result[key] = 'changed';
-    } else {
-      result[key] = 'unchanged';
-    }
-  }
-
-  return result;
+export default (filepath1, filepath2) => {
+  const data1 = readFileSync(filepath1, 'utf-8'); 
+  const data2 = readFileSync(filepath2, 'utf-8');
+  const dataParse1 = JSON.parse(data1);
+  const dataParse2 = JSON.parse(data2);
 };
-
-export default genDiff;

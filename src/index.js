@@ -1,9 +1,13 @@
 import fs from 'fs';
-import path from 'path';
-import process from 'process';
 import _ from 'lodash';
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
 
-const readFile = (filepath) => (fs.readFileSync(path.resolve(process.cwd(), filepath), 'utf-8'));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const getFixturePath = (filename) => resolve(__dirname, '..', '__fixtures__', filename);
+const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
 export default (filepath1, filepath2) => {
   const content1 = readFile(filepath1);

@@ -1,13 +1,5 @@
-import fs from 'fs';
 import _ from 'lodash';
-import { fileURLToPath } from 'url';
-import { dirname, resolve } from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const getFixturePath = (filename) => resolve(__dirname, '..', '__fixtures__', filename);
-const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
+import readFile from './path.js';
 
 export default (filepath1, filepath2) => {
   const content1 = readFile(filepath1);

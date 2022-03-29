@@ -1,11 +1,9 @@
 import _ from 'lodash';
-import readFile from './path.js';
+import parse from './parsers.js';
 
 export default (filepath1, filepath2) => {
-  const content1 = readFile(filepath1);
-  const content2 = readFile(filepath2);
-  const dataParse1 = JSON.parse(content1);
-  const dataParse2 = JSON.parse(content2);
+  const dataParse1 = parse(filepath1);
+  const dataParse2 = parse(filepath2);
 
   const calculateDifferences = (data1, data2) => {
     const keys1 = Object.keys(data1);

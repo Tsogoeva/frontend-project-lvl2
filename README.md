@@ -8,5 +8,8 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/e685f909da0110b30088/test_coverage)](https://codeclimate.com/github/Tsogoeva/frontend-project-lvl2/test_coverage)
 
 
-#### The process of work on the total of 3 steps:
+#### The JSON-file handling process:
 [![asciicast](https://asciinema.org/a/FYJomDrf8UNZfVLa9id8Qq8N7.svg)](https://asciinema.org/a/FYJomDrf8UNZfVLa9id8Qq8N7)
+
+#### The YAML-file handling process:
+[![asciicast](https://asciinema.org/a/ZlzM3dPS50hjYTtfYGeFGmnMp.svg)](https://asciinema.org/a/ZlzM3dPS50hjYTtfYGeFGmnMp)

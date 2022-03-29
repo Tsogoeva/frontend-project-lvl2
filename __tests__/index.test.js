@@ -7,5 +7,5 @@ test('check gendiff for json-file', () => {
 });
 
 test('check gendiff for yaml-file', () => {
-  expect(gendiff('file1.yaml', 'file2.yaml')).toBe(readFile('result-json-file.txt'));
+  expect(gendiff('file1.yml', 'file2.yml')).toBe(readFile('result-json-file.txt'));
 });

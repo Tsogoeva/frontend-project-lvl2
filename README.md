@@ -13,3 +13,6 @@
 
 #### The YAML-file handling process:
 [![asciicast](https://asciinema.org/a/ZlzM3dPS50hjYTtfYGeFGmnMp.svg)](https://asciinema.org/a/ZlzM3dPS50hjYTtfYGeFGmnMp)
+
+#### Example of how a package works with nesting:
+[![asciicast](https://asciinema.org/a/b3ZK2Y5gyjchkS3ttLroFoTgd.svg)](https://asciinema.org/a/b3ZK2Y5gyjchkS3ttLroFoTgd)

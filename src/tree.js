@@ -11,23 +11,35 @@ const buildTree = (data1, data2) => {
 
     if (!Object.hasOwn(data1, key)) {
       return {
-        type: 'added', key, value: value2,
+        type: 'added',
+        key,
+        value: value2,
       };
     } if (!Object.hasOwn(data2, key)) {
       return {
-        type: 'deleted', key, value: value1,
+        type: 'deleted',
+        key,
+        value: value1,
       };
     } if (_.isObject(value1) && _.isObject(value2)) {
       return {
-        type: 'nested', key, children: buildTree(value1, value2),
+        type: 'nested',
+        key,
+        children: buildTree(value1, value2),
       };
-    } if (value1 !== value2) {
+    } if ((value1 !== value2)
+    || (typeof value1 !== typeof value2)) {
       return {
-        type: 'changed', key, val1: value1, val2: value2,
+        type: 'changed',
+        key,
+        val1: value1,
+        val2: value2,
       };
     }
     return {
-      type: 'unchanged', key, value: value1,
+      type: 'unchanged',
+      key,
+      value: value1,
     };
   });
     // console.log(JSON.stringify(result, null, '  '));

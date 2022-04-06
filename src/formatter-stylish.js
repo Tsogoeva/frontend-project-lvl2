@@ -1,32 +1,37 @@
 import _ from 'lodash';
 
-export default (data, replacer = ' ', spacesCount = 2) => {
-  const iter = (currentValue, depth) => {
-    if (!_.isObject(currentValue)) {
-      return `${currentValue}`;
-    }
-    const indentSize = depth * spacesCount;
-    const currentIndent = replacer.repeat(indentSize);
-    const bracketIndent = replacer.repeat(indentSize - spacesCount);
-    const lines = currentValue.map((item) => {
-      if (item.type === 'added') {
-        return `${currentIndent}+ ${item.key}: ${item.value}`;
-      }
-      if (item.type === 'deleted') {
-        return `${currentIndent}- ${item.key}: ${item.value}`;
-      }
-      if (item.type === 'nested') {
-        return `${currentIndent}  ${item.key}: ${iter(item.children, depth + 2)}`;
-      }
-      if (item.type === 'changed') {
-        return `${currentIndent}- ${item.key}: ${item.val1}\n${currentIndent}+ ${item.key}: ${item.val2}`;
-      }
-      if (item.type === 'unchaged') {
-        return `${currentIndent}  ${item.key}: ${item.value}`;
-      }
-      return console.error('Unknown type');
-    });
-    return ['{', ...lines, `${bracketIndent}}`].join('\n');
-  };
-  return iter(data, 1);
+const getIndent = (depth, spacesCount = 4) => {
+  const indentSize = depth * spacesCount;
+  return ' '.repeat(indentSize - 2);
 };
+
+const getStructure = (data, depthData) => {
+  if (!_.isObject(data)) {
+    return `${data}`;
+  }
+  const lines = Object.entries(data)
+    .map(([key, value]) => `${getIndent(depthData + 1)}  ${key}: ${getStructure(value, depthData + 1)}`);
+  return ['{', ...lines, `${getIndent(depthData)}  }`].join('\n');
+};
+
+const makeStylish = (tree) => {
+  const iter = (currentTree, depth) => currentTree.map((node) => {
+    switch (node.type) {
+      case 'added':
+        return `${getIndent(depth)}+ ${node.key}: ${getStructure(node.value, depth)}\n`;
+      case 'deleted':
+        return `${getIndent(depth)}- ${node.key}: ${getStructure(node.value, depth)}\n`;
+      case 'unchanged':
+        return `${getIndent(depth)}  ${node.key}: ${getStructure(node.value, depth)}\n`;
+      case 'nested':
+        return `${getIndent(depth)}  ${node.key}: {\n${iter(node.children, depth + 1).join('')}  ${getIndent(depth)}}\n`;
+      case 'changed':
+        return `${getIndent(depth)}- ${node.key}: ${getStructure(node.val1, depth)}\n${getIndent(depth)}+ ${node.key}: ${getStructure(node.val2, depth)}\n`;
+      default:
+        throw new TypeError(`Unknown type - ${node.type}`);
+    }
+  });
+  return `{\n${iter(tree, 1).join('')}}\n`;
+};
+
+export default makeStylish;

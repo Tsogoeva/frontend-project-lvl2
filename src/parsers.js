@@ -10,5 +10,5 @@ export default (filepath) => {
   if (fileExtension === '.yaml' || fileExtension === '.yml') {
     return yaml.load(readFile(filepath));
   }
-  return console.error('Unknown file format');
+  return console.error(`Unknown file format: ${fileExtension}`);
 };

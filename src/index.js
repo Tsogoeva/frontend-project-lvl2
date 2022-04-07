@@ -1,11 +1,11 @@
 import parse from './parsers.js';
 import buildTree from './tree.js';
-import makeStylish from './formatter-stylish.js';
+import getFormatted from './formatters/index.js';
 
-export default (filepath1, filepath2, format = 'stylish') => {
+export default (filepath1, filepath2, formatName = 'stylish') => {
   const dataParse1 = parse(filepath1);
   const dataParse2 = parse(filepath2);
   const buildedTree = buildTree(dataParse1, dataParse2);
   // selectFormat(buildedTree, format);
-  return makeStylish(buildedTree);
+  return getFormatted(buildedTree, formatName);
 };

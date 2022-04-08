@@ -19,3 +19,6 @@
 
 #### Example of how a package works with format 'plain':
 [![asciicast](https://asciinema.org/a/vrnyO1W9e88YWauGrVo6EMIuI.svg)](https://asciinema.org/a/vrnyO1W9e88YWauGrVo6EMIuI)
+
+#### Example of how a package works with format 'json':
+[![asciicast](https://asciinema.org/a/NZWN2DXmrdWqnchiI85xjNi7s.svg)](https://asciinema.org/a/NZWN2DXmrdWqnchiI85xjNi7s)

@@ -11,9 +11,13 @@ test('verification gendiff for yaml-file using the "stylish" format', () => {
 });
 
 test('verification gendiff for json-file using the "plain" format', () => {
-  expect(gendiff('file1.json', 'file2.json')).toBe(readFile('plain-result.txt'));
+  expect(gendiff('file1.json', 'file2.json', 'plain')).toBe(readFile('plain-result.txt'));
 });
 
 test('verification gendiff for yaml-file using the "plain" format', () => {
-  expect(gendiff('file1.yml', 'file2.yml')).toBe(readFile('plain-result.txt'));
+  expect(gendiff('file1.yml', 'file2.yml', 'plain')).toBe(readFile('plain-result.txt'));
+});
+
+test('verification gendiff using the unknown format', () => {
+  expect(gendiff('file1.json', 'file2.json', 'unknown')).toBe(console.log('Unknown format'));
 });

@@ -8,6 +8,6 @@ export default (data, format) => {
     case 'plain':
       return makePlain(data);
     default:
-      throw new TypeError(`Unknown format: ${format}`);
+      return console.log('Unknown format');
   }
 };

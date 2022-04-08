@@ -1,44 +1,35 @@
 import _ from 'lodash';
 
-const findPath = (ast) => {
-  const iter = (node, path) => {
-    const keys = _.keys(node);
-    return keys.flatMap((key) => {
-      if (_.isObject(node[key])) {
-        const updatedPath = `${path}.${key}`;
-        return iter(node[key], updatedPath);
-      }
-      const finalPath = `${path}.${key}`;
-      return `${finalPath}`;
-    });
-  };
-  return iter(ast, '').join('\n');
+const findValue = (value) => {
+  if (_.isObject(value) && value !== null) {
+    return '[complex value]';
+  }
+  if (_.isString(value)) {
+    return `'${value}'`;
+  }
+  return value;
 };
 
-/* const getStructure = (data, depthData) => {
-  if (!_.isObject(data)) {
-    return `${data}`;
-  }
-  const lines = Object.values(data)
-    .map((value) => `${getStructure(value, depthData + 1)}`);
-  return lines.join();
-}; */
+const findPath = (path, nodeKey) => `${path}.${nodeKey}`;
 
-const makePlain = (ast) => {
-  const iter = (data, depth) => data.map((node) => {
+const makePlain = (ast, path = '') => {
+  const result = ast.map((node) => {
+    const finalPath = findPath(path, node.key).slice(1);
     switch (node.type) {
+      case 'nested':
+        return makePlain(node.children, `${findPath(path, node.key)}`);
       case 'added':
-        return `Property ${findPath(node)} was added with value: ${node.value}`;
+        return `Property '${finalPath}' was added with value: ${findValue(node.value)}`;
       case 'deleted':
-        return `Property ${findPath(node)} was removed`;
+        return `Property '${finalPath}' was removed`;
       case 'changed':
-        return `Property ${findPath(node)} was updated. From ${node.val1} to ${node.val2}`;
-      /* case 'nested':
-        return */
+        return `Property '${finalPath}' was updated. From ${findValue(node.val1)} to ${findValue(node.val2)}`;
       default:
         return '';
     }
-  });
+  })
+    .filter((string) => string !== '');
+  return result.join('\n');
 };
 
 export default makePlain;

@@ -16,3 +16,6 @@
 
 #### Example of how a package works with nesting:
 [![asciicast](https://asciinema.org/a/b3ZK2Y5gyjchkS3ttLroFoTgd.svg)](https://asciinema.org/a/b3ZK2Y5gyjchkS3ttLroFoTgd)
+
+#### Example of how a package works with format 'plain':
+[![asciicast](https://asciinema.org/a/vrnyO1W9e88YWauGrVo6EMIuI.svg)](https://asciinema.org/a/vrnyO1W9e88YWauGrVo6EMIuI)

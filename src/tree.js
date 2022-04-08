@@ -42,7 +42,6 @@ const buildTree = (data1, data2) => {
       value: value1,
     };
   });
-    // console.log(JSON.stringify(result, null, '  '));
   return result;
 };
 

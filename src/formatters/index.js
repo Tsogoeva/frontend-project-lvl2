@@ -7,7 +7,9 @@ export default (data, format) => {
       return makeStylish(data);
     case 'plain':
       return makePlain(data);
+    case 'json':
+      return JSON.stringify(data);
     default:
-      return console.log('Unknown format');
+      return `Unknown format: ${format}`;
   }
 };

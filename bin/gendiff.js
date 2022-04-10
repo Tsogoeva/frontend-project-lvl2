@@ -13,6 +13,6 @@ program
     const { format } = program.opts();
     console.log(gendiff(filepath1, filepath2, format));
   });
-program.parse();
+program.parse(process.argv);
 
 export default gendiff;

@@ -9,13 +9,13 @@ const buildTree = (data1, data2) => {
     const value1 = data1[key];
     const value2 = data2[key];
 
-    if (!Object.hasOwn(data1, key)) {
+    if (!_.has(data1, key)) {
       return {
         type: 'added',
         key,
         value: value2,
       };
-    } if (!Object.hasOwn(data2, key)) {
+    } if (!_.has(data2, key)) {
       return {
         type: 'deleted',
         key,

@@ -178,13 +178,13 @@ BRH:5
 end_of_record
 TN:
 SF:src/formatters/plain.js
-FN:3,findValue
-FN:13,findPath
+FN:3,getValue
+FN:13,getPath
 FN:15,makePlain
 FNF:3
 FNH:3
-FNDA:26,findValue
-FNDA:44,findPath
+FNDA:26,getValue
+FNDA:44,getPath
 FNDA:10,makePlain
 DA:1,1
 DA:2,1

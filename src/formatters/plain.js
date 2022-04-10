@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const findValue = (value) => {
+const getValue = (value) => {
   if (_.isObject(value) && value !== null) {
     return '[complex value]';
   }
@@ -10,25 +10,25 @@ const findValue = (value) => {
   return value;
 };
 
-const findPath = (path, nodeKey) => `${path}.${nodeKey}`;
+const getPath = (path, nodeKey) => `${path}.${nodeKey}`;
 
 const makePlain = (ast, path = '') => {
   const result = ast.map((node) => {
-    const finalPath = findPath(path, node.key).slice(1);
+    const finalPath = getPath(path, node.key).slice(1);
     switch (node.type) {
       case 'nested':
-        return makePlain(node.children, `${findPath(path, node.key)}`);
+        return makePlain(node.children, `${getPath(path, node.key)}`);
       case 'added':
-        return `Property '${finalPath}' was added with value: ${findValue(node.value)}`;
+        return `Property '${finalPath}' was added with value: ${getValue(node.value)}`;
       case 'deleted':
         return `Property '${finalPath}' was removed`;
       case 'changed':
-        return `Property '${finalPath}' was updated. From ${findValue(node.val1)} to ${findValue(node.val2)}`;
+        return `Property '${finalPath}' was updated. From ${getValue(node.val1)} to ${getValue(node.val2)}`;
       default:
         return '';
     }
   })
-    .filter((string) => string !== '');
+    .filter((item) => item !== '');
   return result.join('\n');
 };
 

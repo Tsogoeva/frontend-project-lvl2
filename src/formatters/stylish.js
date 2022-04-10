@@ -28,10 +28,10 @@ const makeStylish = (ast) => {
       case 'changed':
         return `${getIndent(depth)}- ${node.key}: ${getStructure(node.val1, depth)}\n${getIndent(depth)}+ ${node.key}: ${getStructure(node.val2, depth)}\n`;
       default:
-        throw new TypeError(`Unknown type: ${node.type}`);
+        return `Unknown type: ${node.type}`;
     }
   });
-  return `{\n${iter(ast, 1).join('')}}\n`;
+  return `{\n${iter(ast, 1).join('')}}`;
 };
 
 export default makeStylish;

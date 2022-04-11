@@ -1,14 +1,13 @@
 import yaml from 'js-yaml';
 import path from 'path';
-import readFile from './path.js';
 
-export default (filepath) => {
+export default (filepath, readedFile) => {
   const fileExtension = path.extname(filepath).toLowerCase();
   if (fileExtension === '.json') {
-    return JSON.parse(readFile(filepath));
+    return JSON.parse(readedFile);
   }
   if (fileExtension === '.yaml' || fileExtension === '.yml') {
-    return yaml.load(readFile(filepath));
+    return yaml.load(readedFile);
   }
   return console.error(`Unknown file format: ${fileExtension}`);
 };

@@ -16,19 +16,22 @@ const buildTree = (data1, data2) => {
         key,
         value: value2,
       };
-    } if (!_.has(data2, key)) {
+    }
+    if (!_.has(data2, key)) {
       return {
         type: 'deleted',
         key,
         value: value1,
       };
-    } if (_.isObject(value1) && _.isObject(value2)) {
+    }
+    if (_.isObject(value1) && _.isObject(value2)) {
       return {
         type: 'nested',
         key,
         children: buildTree(value1, value2),
       };
-    } if ((value1 !== value2)
+    }
+    if ((value1 !== value2)
     || (typeof value1 !== typeof value2)) {
       return {
         type: 'changed',

@@ -7,23 +7,24 @@ const buildTree = (data1, data2) => {
   const sortedKeys = _.sortBy(allKeys);
 
   const result = sortedKeys.map((key) => {
-    const value1 = data1[key];
-    const value2 = data2[key];
-
     if (!_.has(data1, key)) {
       return {
         type: 'added',
         key,
-        value: value2,
+        value: data2[key],
       };
     }
     if (!_.has(data2, key)) {
       return {
         type: 'deleted',
         key,
-        value: value1,
+        value: data1[key],
       };
     }
+
+    const value1 = data1[key];
+    const value2 = data2[key];
+
     if (_.isObject(value1) && _.isObject(value2)) {
       return {
         type: 'nested',

@@ -10,51 +10,18 @@ const __dirname = path.dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-test('verification gendiff for json-file using the "stylish" format', () => {
-  const filepath1 = getFixturePath('file1.json');
-  const filepath2 = getFixturePath('file2.json');
-  const result = gendiff(filepath1, filepath2, 'stylish');
-  expect(result).toBe(readFile('stylish-result.txt'));
-});
+const cases = [
+  ['file1.json', 'file2.json', 'stylish', 'stylish-result.txt'],
+  ['file1.yml', 'file2.yml', 'stylish', 'stylish-result.txt'],
+  ['file1.json', 'file2.json', 'plain', 'plain-result.txt'],
+  ['file1.yml', 'file2.yml', 'plain', 'plain-result.txt'],
+  ['file1.json', 'file2.json', 'json', 'json-result.txt'],
+  ['file1.yml', 'file2.yml', 'json', 'json-result.txt'],
+];
 
-test('verification gendiff for yaml-file using the "stylish" format', () => {
-  const filepath1 = getFixturePath('file1.yml');
-  const filepath2 = getFixturePath('file2.yml');
-  const result = gendiff(filepath1, filepath2, 'stylish');
-  expect(result).toBe(readFile('stylish-result.txt'));
-});
-
-test('verification gendiff for json-file using the "plain" format', () => {
-  const filepath1 = getFixturePath('file1.json');
-  const filepath2 = getFixturePath('file2.json');
-  const result = gendiff(filepath1, filepath2, 'plain');
-  expect(result).toBe(readFile('plain-result.txt'));
-});
-
-test('verification gendiff for yaml-file using the "plain" format', () => {
-  const filepath1 = getFixturePath('file1.yml');
-  const filepath2 = getFixturePath('file2.yml');
-  const result = gendiff(filepath1, filepath2, 'plain');
-  expect(result).toBe(readFile('plain-result.txt'));
-});
-
-test('verification gendiff for json-file using the "json" format', () => {
-  const filepath1 = getFixturePath('file1.json');
-  const filepath2 = getFixturePath('file2.json');
-  const result = gendiff(filepath1, filepath2, 'json');
-  expect(result).toBe(readFile('json-result.txt'));
-});
-
-test('verification gendiff for yaml-file using the "json" format', () => {
-  const filepath1 = getFixturePath('file1.yml');
-  const filepath2 = getFixturePath('file2.yml');
-  const result = gendiff(filepath1, filepath2, 'json');
-  expect(result).toBe(readFile('json-result.txt'));
-});
-
-test('verification gendiff using the unknown format', () => {
-  const filepath1 = getFixturePath('file1.json');
-  const filepath2 = getFixturePath('file2.json');
-  const result = gendiff(filepath1, filepath2, 'unknown');
-  expect(result).toBe('Unknown format: unknown');
+test.each(cases)('Comparing %s and %s in the %s format returns %s', (filename1, filename2, format, expected) => {
+  const filepath1 = getFixturePath(filename1);
+  const filepath2 = getFixturePath(filename2);
+  const result = gendiff(filepath1, filepath2, format);
+  expect(result).toBe(readFile(expected));
 });

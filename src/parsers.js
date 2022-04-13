@@ -1,11 +1,13 @@
 import yaml from 'js-yaml';
 
-export default (fileExtension, fileData) => {
-  if (fileExtension === '.json') {
-    return JSON.parse(fileData);
+export default (extension, data) => {
+  switch (extension) {
+    case 'json':
+      return JSON.parse(data);
+    case 'yaml':
+    case 'yml':
+      return yaml.load(data);
+    default:
+      throw new Error(`Unknown extension: ${extension}`);
   }
-  if (fileExtension === '.yaml' || fileExtension === '.yml') {
-    return yaml.load(fileData);
-  }
-  return console.error(`Unknown file format: ${fileExtension}`);
 };

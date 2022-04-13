@@ -32,8 +32,7 @@ const buildTree = (data1, data2) => {
         children: buildTree(value1, value2),
       };
     }
-    if ((value1 !== value2)
-    || (typeof value1 !== typeof value2)) {
+    if (value1 !== value2) {
       return {
         type: 'changed',
         key,

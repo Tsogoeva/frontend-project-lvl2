@@ -10,14 +10,14 @@ const getValue = (value) => {
   return value;
 };
 
-const getPath = (path, nodeKey) => `${path}.${nodeKey}`;
+const getAscentryPath = (path, nodeKey) => [path, nodeKey];
 
 const makePlain = (ast, path = '') => {
   const result = ast.map((node) => {
-    const finalPath = getPath(path, node.key).slice(1);
+    const finalPath = getAscentryPath(path, node.key).join('.').slice(1);
     switch (node.type) {
       case 'nested':
-        return makePlain(node.children, `${getPath(path, node.key)}`);
+        return makePlain(node.children, `${getAscentryPath(path, node.key).join('.')}`);
       case 'added':
         return `Property '${finalPath}' was added with value: ${getValue(node.value)}`;
       case 'deleted':

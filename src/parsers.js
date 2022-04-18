@@ -1,13 +1,13 @@
 import yaml from 'js-yaml';
 
-export default (extension, data) => {
-  switch (extension) {
+export default (parseType, data) => {
+  switch (parseType) {
     case 'json':
       return JSON.parse(data);
     case 'yaml':
     case 'yml':
       return yaml.load(data);
     default:
-      throw new Error(`Unknown extension: ${extension}`);
+      throw new Error(`Unknown extension: ${parseType}`);
   }
 };
